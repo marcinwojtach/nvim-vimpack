@@ -19,16 +19,19 @@ vim.pack.add {
   { src = "https://github.com/Shatur/neovim-ayu" },
 }
 
+local required_langs = {
+  "intelephense",
+  "angularls",
+  "lua_ls",
+  "stylua",
+  "tsgo",
+}
+
 require("oil").setup()
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
-  ensure_installed = {
-    "angularls",
-    "lua_ls",
-    "stylua",
-    "tsgo",
-  }
+  ensure_installed = required_langs
 })
 require("which-key").setup({
   preset = 'helix',
@@ -66,11 +69,7 @@ require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 require("persistence").setup()
 
 -- LSP
-vim.lsp.enable({
-  "lua_ls",
-  "stylua",
-  "tsgo",
-})
+vim.lsp.enable(required_langs)
 
 -- OPTIONS
 vim.g.mapleader = " "
